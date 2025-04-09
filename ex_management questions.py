@@ -300,30 +300,34 @@ print(emp.promotion())
 '''
 
 #5.school management system
-class school():
+'''class school():
     def __init__(self):
         self.grade = int(input("Enter Grade: "))
         self.marks = int(input("Enter marks: "))
         self.attendance = int(input("Enter number of days present: "))
         print('Fee for primary secion is 30000 per year, \nFee for middle section is 50000 per year, \nFee for senior section is 75000 per year')
         self.fee = input("FEE PAID OR NOT? ").lower()
+        self.section = ""
+        print()
     def std_Adm(self):
         if 1 <= self.grade <=5:
-            return "Primary Section"
+            self.section = "Primary Section"
         elif 6 <= self.grade <= 10:
-            return "Middle Section"
+            self.section = "Middle Section"
         elif 11 <= self.grade <=12:
-            return "Senior Section"
+            self.section = "Senior Section"
         else:
             return "Please enter Grade between 1 and 12"
+        
+        return f"You are assigned to {self.section}"
 
     def grade_calc(self):
         if self.marks >= 90:
-            return "A Grade"
+            return "Your Grade is A"
         elif 80 <= self.marks < 90:
-            return "B Grade"
+            return "Your Grade is B"
         elif 70 <= self.marks < 80:
-            return "C Grade"
+            return "Your Grade is C"
         else:
             return "Fail"
 
@@ -338,7 +342,63 @@ class school():
 
     def fee_management(self):
         if self.fee == 'fully paid':
-            return "No balance to show, fully paid"
-        elif self.fee == "partially paid":
-            paid amount
-    
+                return "No balance to show, fully paid"
+        elif self.fee == "partially paid" or self.fee == "not paid" or self.fee == "no":
+            paid_amount = int(input("Enter the fee amount already paid: "))
+            if self.section == "Primary Section":
+                return f"Remaining fee need to be paid is", 30000 - paid_amount
+            elif self.section == "Middle Section":
+                return f"Remaining fee need to be paid is", 50000 - paid_amount
+            elif self.section == "Senior Section":
+                return f"Remaining fee need to be paid is", 75000 - paid_amount
+            else:
+                return "Invalid value"
+        else:
+            return "Invalid Value"
+        
+scl = school()
+print(scl.std_Adm())
+print(scl.grade_calc())
+print(scl.attd_track())
+print(scl.fee_management())'''
+
+#Restaurent order management system
+
+class restaurent():
+    def __init__(self):
+        print("In Our Restaurent, we have Three types of Table Reservations which are VIP section, Family section, General section.")
+        print()
+        self.section = input("Enter the type of table reservation you wish: ").lower()
+        print()
+    def table_reservation(self):
+        if self.section == "vip":
+            return "Minimum bill Rs. 5000 required"
+        elif self.section == "family":
+            return "Minimum bill Rs. 3000 required"
+        elif self.section == "general":
+            return "No Minimum bill is required"
+        else:
+            return "Invalid reservation section selected."
+        
+    def order(self):
+        orders=[]
+        num_orders = int(input('Enter the number of items you wish to order: '))
+        total = 0
+        for i in range(num_orders):
+            menu = input(f"Enter the name of the dish{i+1}: ")
+            orders.append(menu)
+            
+        for dish in orders:
+            if dish == 'pizza':
+                qty = int(input("Enter quantity: "))
+                total += qty*300
+            elif dish == 'sandwich':
+                qty = int(input("Enter quantity: "))
+                total += qty*300
+            elif dish == 'sandwich':
+                qty = int(input("Enter quantity: "))
+                total += qty*300
+        return "Bill amount is ",total
+
+hotel = restaurent()
+print(hotel.order())
