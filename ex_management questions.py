@@ -1,3 +1,4 @@
+
 #Hospital management system
 '''
 class hospital():
@@ -163,71 +164,59 @@ print(lms.membership_fee())
 
 #hotel booking and management system
 '''
-class hotel():
-    print("Our Hotel provides three types of rooms: Luxury, Deluxe and Standard")
-    print()
-    print("Service Request Dial Numbers: 1 for Room cleaning, 2 for Laundry service, 3 for Food Delivery and 4 for Taxi Service")
-    print()
-    #def __init__(self):
-        
-        #self.room_type = input('Enter Type of Room: ').lower()
-        #self.service_request = int(input('Enter number for service request: '))
-        #self.days = int(input("How many nights needed: "))
+class Hotel:
+    def __init__(self):
+        print("Our Hotel provides three types of rooms: Luxury, Deluxe and Standard")
+        print()
+        print("Service Request Dial Numbers: 1 for Room cleaning, 2 for Laundry service, 3 for Food Delivery and 4 for Taxi Service")
+        print()
+
+        self.room_type = input('Enter Type of Room: ').lower()
+        self.service_request = int(input('Enter number for service request: '))
+        self.days = int(input("How many nights needed: "))
+
     def room_booking(self):
-        
-        if self.room_type == "luxury":
-            return f"Luxury room charges for {self.days} day(s) is", self.days*10000
-            
-        elif self.room_type == "deluxe":
-            return f"Deluxe room charges for {self.days} day(s) is", self.days*7000
-            
-        elif self.room_type == "standard":
-            return f"Standard room charges for {self.days} day(s) is", self.days*5000
-            
+        prices = {'luxury': 10000, 'deluxe': 7000, 'standard': 5000}
+        if self.room_type in prices:
+            total = self.days * prices[self.room_type]
+            return f"{self.room_type} room charges for {self.days} day(s) is ₹{total}"
         else:
-            print("Service Not Available")
+            return "Invalid room type selected."
 
     def service_req(self):
-        if self.service_request == 1:
-            return "Room Cleaning"
-        elif self.service_request == 2:
-            return "laundry Service"
-        elif self.service_request == 3:
-            return "Food Delivery"
-        elif self.service_request == 4:
-            return "Taxi Service"
-        else:
-            return "Service Not Available"
-            '''
-        
-'''def room_availability(self):
-        #no.of rooms from user, if it's available show the room types and price
-        num_rooms = int(input("Enter number of rooms: "))
+        services = {
+            1: "Room Cleaning",
+            2: "Laundry Service",
+            3: "Food Delivery",
+            4: "Taxi Service"
+        }
+        return services.get(self.service_request, "Service Not Available")
+
+    def room_availability(self):
+        num_rooms = int(input("Enter number of rooms needed: "))
         room_data = {
-            'luxury':{'room_available':5, 'price': 10000},
-            'deluxe':{'room_available':10, 'price':7000},
-            'standard':{'room_available':7, 'price': 5000}
-            }
-        for key, room_info in room_data.items():
-           # print(key,room_info)
-            #if key == self.room_type in key:
+            'luxury': {'room_available': 5, 'price': 10000},
+            'deluxe': {'room_available': 10, 'price': 7000},
+            'standard': {'room_available': 7, 'price': 5000}
+        }
+
+        if self.room_type in room_data:
+            room_info = room_data[self.room_type]
             if num_rooms <= room_info['room_available']:
-                return f"ROOM TYPE: {key}, PRICE: {room_info['price']}"
+                return f"{self.room_type.capitalize()} Room(s) available. Price per night: ₹{room_info['price']}"
             else:
-                return "Sorry, not enough rooms availble"
-            
-            return "Invalid room type"
-                    '''
+                return "Sorry, not enough rooms available."
+        else:
+            return "Invalid room type."
 
-    
-'''    def membership_fee(self):
-        
-        
-            '''
-#hotelmanagement = hotel()
-#print(hotelmanagement.room_booking())
-#print(hotelmanagement.room_availability())
 
+hotel_management = Hotel()
+print()
+print(hotel_management.room_booking())
+print("Requested Service:", hotel_management.service_req())
+print(hotel_management.room_availability())
+
+'''
 #employee management system
 '''
 class employee():
@@ -395,10 +384,20 @@ class restaurent():
             elif dish == 'sandwich':
                 qty = int(input("Enter quantity: "))
                 total += qty*300
-            elif dish == 'sandwich':
+            elif dish == 'cutlet':
                 qty = int(input("Enter quantity: "))
                 total += qty*300
         return "Bill amount is ",total
+    
+        if total >=5000:
+            discount = 10/100*5000
+        elif total >=10000:
+            discount = 20/100*5000
+            
+        else:
+            return "No discount"
+
+        return discount
 
 hotel = restaurent()
 print(hotel.order())
